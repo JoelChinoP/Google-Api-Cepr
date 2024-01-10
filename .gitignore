@@ -1,6 +1,9 @@
 .gradle
 **/build/
 !src/**/build/
+bin/
+tokens/
+.idea/
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -23,8 +26,6 @@ gradle-app.setting
 # Ignore Gradle build output directory
 build
 
-#credentials
+#resources
 credentials.json
-
-#token
-tokens/
+apellidos.txt
