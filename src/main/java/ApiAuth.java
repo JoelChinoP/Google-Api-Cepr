@@ -29,7 +29,6 @@ public class ApiAuth {
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
-    private static final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport(); // Build a new authorized API client service.
 
     private static ArrayList<String> SCOPES =
             new ArrayList<>(Arrays.asList(
@@ -37,11 +36,13 @@ public class ApiAuth {
                     ClassroomScopes.CLASSROOM_TOPICS,
                     ClassroomScopes.CLASSROOM_COURSEWORKMATERIALS,
                     DriveScopes.DRIVE,
-                    SheetsScopes.SPREADSHEETS,
+                    SheetsScopes.SPREADSHEETS
                     ));
 
     static Classroom getClassroomService ()
             throws GeneralSecurityException, IOException {
+        // Build a new authorized API client service.
+        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         return
                 new Classroom.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
                         .setApplicationName(APPLICATION_NAME)
@@ -50,6 +51,8 @@ public class ApiAuth {
 
     static Drive getDriveService ()
             throws GeneralSecurityException, IOException {
+        // Build a new authorized API client service.
+        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         return
                 new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
                         .setApplicationName(APPLICATION_NAME)
@@ -58,6 +61,8 @@ public class ApiAuth {
 
     static Sheets getSheetsService ()
             throws GeneralSecurityException, IOException {
+        // Build a new authorized API client service.
+        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         return
                 new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
                         .setApplicationName(APPLICATION_NAME)
@@ -69,7 +74,7 @@ public class ApiAuth {
             throws IOException {
 
         // Load client secrets.
-        InputStream in = ApiCredentials.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+        InputStream in = ApiAuth.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
         if (in == null) {
             throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
         }
