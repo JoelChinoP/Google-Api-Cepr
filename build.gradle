@@ -12,7 +12,7 @@ plugins {
 
 application {
     //mainClassName = "ClassroomQuickstart"
-    mainClass.set("MaterialesPdf")
+    mainClass.set("ProjectMain")
 }
 
 java {
